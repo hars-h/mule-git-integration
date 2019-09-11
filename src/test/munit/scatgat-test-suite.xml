@@ -13,7 +13,7 @@
 			<flow-ref doc:name="Flow-ref to scatgatFlow" doc:id="fcca66e9-3baf-4c13-8ce5-55f4b268d425" name="scatgatFlow"/>
 		</munit:execution>
 		<munit:validation >
-			<munit-tools:assert-that doc:name="Assert that" doc:id="aaf4a73c-99de-4d23-98c5-4dc400f258ce" expression="#[vars.b]" is="#[MunitTools::equalTo('H b')]" message='#[vars.b ++ " and H-b"]'/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="aaf4a73c-99de-4d23-98c5-4dc400f258ce" expression="#[vars.b]" is="#[MunitTools::equalTo('H b')]" message='#[vars.b ++ " and H b"]'/>
 		</munit:validation>
 	</munit:test>
 
