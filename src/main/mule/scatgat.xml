@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="44b29cf6-c4ee-4dbc-baf9-51757ee24c0a" basePath="/sg" >
+		<http:listener-connection host="0.0.0.0" port="8084" />
+	</http:listener-config>
+	<flow name="scatgatFlow" doc:id="5de59777-2147-420a-8d8a-d43c0ea4b4c6" >
+		<http:listener doc:name="Listener" doc:id="011138aa-4d19-4df3-b311-0e56c4fd0306" config-ref="HTTP_Listener_config" path="/var"/>
+		<set-variable value='" H v1"' doc:name="v1" doc:id="b52fafa2-b983-4104-b11b-4c689839bf73" variableName="v1"/>
+		<set-payload value='#["H payload"]' doc:name="Set Payload" doc:id="8a0afb54-4e03-47c9-b11d-bcd78cebdaba" />
+		<scatter-gather doc:name="Scatter-Gather" doc:id="c4615128-9ffe-4493-9752-30df45d29cd1" >
+			<route >
+				<set-variable value='"H b"' doc:name="Set B" doc:id="41c0a741-3f10-4eb7-b59c-88594a596081" variableName="b"/>
+				<logger level="INFO" doc:name="Logger" doc:id="25642f10-9722-4ae5-b694-5584af5745d4" message='#["H B output : v1 = " ++ vars.v1 ++ " Payload = " ++ payload ++ " b = " ++ vars.b]'/>
+			</route>
+			<route >
+				<set-variable value='"H A"' doc:name="Set A" doc:id="ad581662-3427-4de3-a9d9-3b2a815734a3" variableName="a"/>
+				<logger level="INFO" doc:name="Logger" doc:id="67e3d246-e1c5-4c0f-a4c0-59f4a4afdbba" message='#["H A output : v1 = " ++ vars.v1 ++ " Payload = " ++ payload ++ " a = " ++ vars.a]'/>
+			</route>
+		</scatter-gather>
+		<set-payload value='#["Final Payload output : v1 = " ++ vars.v1 ++ " Payload =  null"  ++ " b = " ++ vars.b ++ " a = " ++ vars.a]' doc:name="Set Payload" doc:id="8065e16e-a658-47b2-bcf0-f393a99c36b0" />
+		<logger level="INFO" doc:name="Logger" doc:id="229b4f46-a0c4-449f-9b54-f44a1636a435" message='#["H B output : v1 = " ++ vars.v1 ++ " Payload = null "  ++ " b = " ++ vars.b ++ " a = " ++ vars.a]'/>
+	</flow>
+</mule>

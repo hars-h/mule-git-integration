@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="scatgat-test-suite.xml" />
+	<munit:test name="scatgat-test-suite-scatgatFlowTest" description="Test" doc:id="e52ec213-d106-4e2e-a530-f655b5bf5559" >
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to scatgatFlow" doc:id="fcca66e9-3baf-4c13-8ce5-55f4b268d425" name="scatgatFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="aaf4a73c-99de-4d23-98c5-4dc400f258ce" expression="#[vars.a]" is="#[MunitTools::equalTo('&quot;H a&quot;')]" message='#[vars.a ++ " and H-a"]'/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
